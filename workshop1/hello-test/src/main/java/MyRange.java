@@ -16,18 +16,18 @@ public class MyRange {
 
     public int getStartNumber() {
         int response = this.request.charAt(1) - ASCII_VALUE;
-        if(!isStartWithInclude()){
-            response += 1;
+        if(isStartWithInclude()){
+            return response;
         }
-        return response;
+        return response + 1;
     }
 
     public int getEndNumber() {
         int response = this.request.charAt(3) - ASCII_VALUE;
-        if(!isEndWithInclude()){
-            response -= 1;
+        if(isEndWithInclude()){
+            return response;
         }
-        return response;
+        return response - 1;
     }
 
 
