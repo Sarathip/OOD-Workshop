@@ -3,7 +3,7 @@ public class TennisGame1 {
     private int m_score2 = 0;
     private String player1Name = "";
     private String player2Name = "";
-    private int round = 3;
+    private String[] scoreResults = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
 
     public TennisGame1(String player1Name, String player2Name) {
         this.player1Name = player1Name;
@@ -12,64 +12,40 @@ public class TennisGame1 {
 
     public void wonPoint(String playerName) {
         if (playerName == player1Name)
-            m_score1 += 1;
+            m_score1 ++;
         else
-            m_score2 += 1;
+            m_score2 ++;
     }
 
     public String getScore() {
-        String score = "";
-        int tempScore=0;
-        if (m_score1==m_score2)
-        {
-            switch (m_score1)
-            {
-                case 0:
-                    score = "Love-All";
-                    break;
-                case 1:
-                    score = "Fifteen-All";
-                    break;
-                case 2:
-                    score = "Thirty-All";
-                    break;
-                default:
-                    score = "Deuce";
-                    break;
 
-            }
-        }
-        else if (m_score1>=4 || m_score2>=4)
+        if (GetScoreLessThanEqTwo()) return scoreResults[m_score1] + "-" + "All";
+        if (GetScoreMoreThanTwo()) return "Deuce";
+        if (m_score1>=4 || m_score2>=4)
         {
+            String score = "";
             int minusResult = m_score1-m_score2;
             if (minusResult == 1) score ="Advantage " + player1Name;
             else if (minusResult ==-1) score ="Advantage " + player2Name;
             else if (minusResult>=2) score = "Win for " + player1Name;
             else score ="Win for " + player2Name;
+            return score.toString();
         }
-        else
-        {
-            for (int i=1; i<round; i++)
-            {
-                if (i==1) tempScore = m_score1;
-                else { score+="-"; tempScore = m_score2;}
-                switch(tempScore)
-                {
-                    case 0:
-                        score+="Love";
-                        break;
-                    case 1:
-                        score+="Fifteen";
-                        break;
-                    case 2:
-                        score+="Thirty";
-                        break;
-                    case 3:
-                        score+="Forty";
-                        break;
-                }
-            }
+
+        return scoreResults[m_score1] + "-" + scoreResults[m_score2];
+    }
+
+    private boolean GetScoreMoreThanTwo() {
+        if(m_score1 > 2 && m_score2 > 2 && m_score1 == m_score2){
+            return true;
         }
-        return score;
+        return false;
+    }
+
+    private boolean GetScoreLessThanEqTwo() {
+        if(m_score1 <= 2 && m_score2 <= 2 && m_score1 == m_score2){
+            return true;
+        }
+        return false;
     }
 }
