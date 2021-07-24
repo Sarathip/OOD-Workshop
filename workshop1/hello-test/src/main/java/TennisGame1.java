@@ -19,10 +19,9 @@ public class TennisGame1 {
     }
 
     public String getScore() {
-
-        if (CheckScoreLessThanEqTwo()) return scoreResults[m_score1] + "-" + "All";
-        if (CheckScoreMoreThanTwo()) return "Deuce";
-        if (CheckScoreMoreThanFour()) return GetScoreMoreThanFour();
+        if (CheckAll()) return scoreResults[m_score1] + "-" + "All";
+        if (CheckDeuce()) return "Deuce";
+        if (CheckWin()) return GetScoreMoreThanFour();
         return scoreResults[m_score1] + "-" + scoreResults[m_score2];
     }
 
@@ -36,21 +35,21 @@ public class TennisGame1 {
         return score.toString();
     }
 
-    private boolean CheckScoreMoreThanFour() {
+    private boolean CheckWin() {
         if (m_score1>=4 || m_score2>=4){
             return true;
         }
         return false;
     }
 
-    private boolean CheckScoreMoreThanTwo() {
+    private boolean CheckDeuce() {
         if(m_score1 > 2 && m_score2 > 2 && m_score1 == m_score2){
             return true;
         }
         return false;
     }
 
-    private boolean CheckScoreLessThanEqTwo() {
+    private boolean CheckAll() {
         if(m_score1 <= 2 && m_score2 <= 2 && m_score1 == m_score2){
             return true;
         }
