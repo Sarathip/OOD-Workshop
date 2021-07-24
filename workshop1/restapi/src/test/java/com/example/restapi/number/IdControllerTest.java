@@ -10,6 +10,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -24,7 +25,7 @@ public class IdControllerTest {
 	@Test
 	void generateId() {
 		// Arrange
-		when(stubRandom.nextInt(10)).thenReturn(7);
+		when(stubRandom.nextInt(anyInt())).thenReturn(7);
 		// Act
 		DataResponse result
 				= restTemplate.getForObject("/id", DataResponse.class);
