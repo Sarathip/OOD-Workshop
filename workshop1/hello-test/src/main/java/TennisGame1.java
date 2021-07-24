@@ -19,30 +19,37 @@ public class TennisGame1 {
 
     public String getScore() {
 
-        if (GetScoreLessThanEqTwo()) return scoreResults[m_score1] + "-" + "All";
-        if (GetScoreMoreThanTwo()) return "Deuce";
-        if (m_score1>=4 || m_score2>=4)
-        {
-            String score = "";
-            int minusResult = m_score1-m_score2;
-            if (minusResult == 1) score ="Advantage " + player1Name;
-            else if (minusResult ==-1) score ="Advantage " + player2Name;
-            else if (minusResult>=2) score = "Win for " + player1Name;
-            else score ="Win for " + player2Name;
-            return score.toString();
-        }
-
+        if (CheckScoreLessThanEqTwo()) return scoreResults[m_score1] + "-" + "All";
+        if (CheckScoreMoreThanTwo()) return "Deuce";
+        if (CheckScoreMoreThanFour()) return GetScoreMoreThanFour();
         return scoreResults[m_score1] + "-" + scoreResults[m_score2];
     }
 
-    private boolean GetScoreMoreThanTwo() {
+    private String GetScoreMoreThanFour() {
+        String score = "";
+        int minusResult = m_score1-m_score2;
+        if (minusResult == 1) score ="Advantage " + player1Name;
+        else if (minusResult ==-1) score ="Advantage " + player2Name;
+        else if (minusResult>=2) score = "Win for " + player1Name;
+        else score ="Win for " + player2Name;
+        return score.toString();
+    }
+
+    private boolean CheckScoreMoreThanFour() {
+        if (m_score1>=4 || m_score2>=4){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean CheckScoreMoreThanTwo() {
         if(m_score1 > 2 && m_score2 > 2 && m_score1 == m_score2){
             return true;
         }
         return false;
     }
 
-    private boolean GetScoreLessThanEqTwo() {
+    private boolean CheckScoreLessThanEqTwo() {
         if(m_score1 <= 2 && m_score2 <= 2 && m_score1 == m_score2){
             return true;
         }
