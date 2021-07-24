@@ -21,11 +21,11 @@ public class TennisGame1 {
     public String getScore() {
         if (CheckAll()) return scoreResults[m_score1] + "-" + "All";
         if (CheckDeuce()) return "Deuce";
-        if (CheckWin()) return GetScoreMoreThanFour();
+        if (CheckWin()) return GetScoreWin();
         return scoreResults[m_score1] + "-" + scoreResults[m_score2];
     }
 
-    private String GetScoreMoreThanFour() {
+    private String GetScoreWin() {
         AtomicReference<String> score = new AtomicReference<>("");
         int minusResult = m_score1-m_score2;
         if (minusResult == 1) score.set("Advantage " + player1Name);
