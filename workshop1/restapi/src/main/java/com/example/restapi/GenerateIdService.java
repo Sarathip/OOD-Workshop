@@ -8,7 +8,7 @@ import java.util.Random;
 
 @Component
 public class GenerateIdService {
-
+    public int counter;
     private Random random = new Random();
 
     @Autowired
